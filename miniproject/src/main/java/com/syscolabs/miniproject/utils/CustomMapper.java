@@ -17,20 +17,21 @@ public class CustomMapper implements ICustomMapper{
 
 
     @Override
-    public ProductSummaryDto mapProductDtoToProductSummaryDto(Product product) {
+    public ProductSummaryDto mapProductToProductSummaryDto(Product product) {
         ProductSummaryDto productSummaryDto = new ProductSummaryDto(
                 product.getId(),
                 product.getName(),
                 product.getQty(),
                 product.getPrice(),
                 product.getImgURL(),
+                product.getCategory().getName(),
                 product.getProducer().getId()
         );
         return productSummaryDto;
     }
 
     @Override
-    public List<ProductSummaryDto> mapProductDtosToProductSummaryDtos(List<Product> productList) {
+    public List<ProductSummaryDto> mapProductsToProductSummaryDtos(List<Product> productList) {
         List<ProductSummaryDto> roductSummaryDtoList = productList
                 .stream()
                 .map(x-> {
@@ -40,17 +41,13 @@ public class CustomMapper implements ICustomMapper{
                             x.getQty(),
                             x.getPrice(),
                             x.getImgURL(),
+                            x.getCategory().getName(),
                             x.getProducer().getId()
                     );
                 })
                 .collect(Collectors.toList());
 
         return roductSummaryDtoList;
-    }
-
-    @Override
-    public Product mapProductSummaryDtoToProduct(ProductSummaryDto productSummaryDto) {
-        return null;
     }
 
 

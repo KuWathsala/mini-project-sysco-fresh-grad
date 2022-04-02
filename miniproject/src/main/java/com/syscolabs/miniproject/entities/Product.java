@@ -42,7 +42,7 @@ public class Product {
             optional = false
     )
     private Category category;
-    @JsonBackReference
+    @JsonBackReference(value = "category-product")
     public Category getCategory() {
         return category;
     }

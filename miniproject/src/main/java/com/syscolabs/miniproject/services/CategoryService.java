@@ -22,6 +22,14 @@ public class CategoryService implements ICategoryService {
     private ModelMapper mapper;
 
     @Override
+    public CategoryDto addNewCategory(CategoryDto categoryDto) {
+        Category category = mapper.map(categoryDto, Category.class);
+        this.categoryRepository.save(category);
+        CategoryDto createdCategoryDto = mapper.map(category, CategoryDto.class);
+        return createdCategoryDto;
+    }
+
+    @Override
     public List<CategoryDto> getAllCategories() {
 
         List<Category> categoryList = this.categoryRepository.findAll();

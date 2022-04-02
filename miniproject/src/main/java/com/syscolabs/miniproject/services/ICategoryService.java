@@ -7,5 +7,6 @@ import java.util.List;
 
 @Service
 public interface ICategoryService {
+    CategoryDto addNewCategory(CategoryDto categoryDto);
     List<CategoryDto> getAllCategories();
 }

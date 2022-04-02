@@ -1,10 +1,7 @@
 package com.syscolabs.miniproject.entities;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,14 +19,19 @@ public class Category {
     @Id
     private String name;
 
+    @NonNull
+    private String imgURL;
+
     @OneToMany(
             targetEntity = Product.class,
             mappedBy = "category",
+            cascade = CascadeType.PERSIST,
+            orphanRemoval = true,
             fetch = FetchType.LAZY
     )
     private List<Product> products;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "category-product")
     public List<Product> getProducts() {
         return products;
     }
